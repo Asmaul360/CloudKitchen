@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The Cloud Kitchen Backend is a complete server-side system designed to manage online food ordering, customer operations, and admin functionalities for a cloud kitchen business. This backend acts as the central brain of the application by handling data storage, authentication, order processing, payment verification, delivery updates, and admin dashboard controls.",
+  "keywords": [
+    "node.js",
+    "express.js",
+    "monogDB"
+  ],
+  "homepage": "https://github.com/Asmaul360/CloudKitchen#readme",
+  "bugs": {
+    "url": "https://github.com/Asmaul360/CloudKitchen/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Asmaul360/CloudKitchen.git"
+  },
+  "license": "ISC",
+  "author": "CHACHA CODERS",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
