@@ -20,15 +20,17 @@ const userSchema = new mongoose.Schema(
     },
     address: [
       {
-        receiverName: String,
-        phone: String,
-        street: String,
-        city: String,
-        state: String,
-        pincode: String,
-        landmark: String,
+        _id: false,
+        receiverName: { type: String, trim: true },
+        phone: { type: String, trim: true },
+        street: { type: String, trim: true },
+        city: { type: String, trim: true },
+        state: { type: String, trim: true },
+        pincode: { type: String, trim: true },
+        landmark: { type: String, trim: true },
       },
     ],
+
     firstName: {
       type: String,
       required: true,
@@ -40,8 +42,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    phone: {
+      type: Number,
+      required: true,
+    },
 
-    profileImage: { type: String },
+    profileImage: { type: String, required: true },
 
     coverImage: { type: String },
 
@@ -52,9 +58,8 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["admin", "user"],
+      enum: ["admin", "user", "delivery"],
       default: "user",
-      required: true,
     },
   },
   { timestamps: true }
@@ -83,4 +88,5 @@ userSchema.methods.generateRefreshToken = function () {
     expiresIn: process.env.REFRESH_TOKEN_EXPIRES,
   });
 };
+
 export const User = mongoose.model("User", userSchema);
