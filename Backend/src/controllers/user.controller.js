@@ -85,6 +85,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
   const options = {
     httpOnly: true,
+    sameSite: "lax",
     secure: false,
   };
   return res
@@ -108,6 +109,7 @@ const logoutUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: false,
+    sameSite: "lax",
   };
   return res
     .status(200)
@@ -168,3 +170,61 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Account details updated Successfully"));
 });
+const updateUserProfileImage = asyncHandler(async (req, res) => {
+  const profileImageLocalPath = req.files?.profile?.[0]?.path;
+
+  if (!profileImageLocalPath) {
+    throw new ApiError(400, "Profile image is missing");
+  }
+
+  const profileImage = await uploadToCloudinary(profileImageLocalPath);
+
+  if (!profileImage || !profileImage.url) {
+    throw new ApiError(400, "Error while uploading Profile Image");
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.user?._id,
+    {
+      $set: { profileImage: profileImage.url },
+    },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "Profile Image updated successfully"));
+});
+const updateUserCoverImage = asyncHandler(async (req, res) => {
+  const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
+  if (!coverImageLocalPath) {
+    throw new ApiError(400, "Cover Image is missing");
+  }
+  const coverImage = await uploadToCloudinary(coverImageLocalPath);
+  if (!coverImage || !coverImage.url) {
+    throw new ApiError(400, "Error while uploading Cover Image");
+  }
+  const user = await User.findByIdAndUpdate(
+    req.user?._id,
+    {
+      $set: { coverImage: coverImage.url },
+    },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, user, "CoverImage updated successfully"));
+});
+
+export {
+  generateAccessTokenAndRefreshToken,
+  registerUser,
+  loginUser,
+  logoutUser,
+  changePassword,
+  getCurrentUser,
+  updateAccountDetails,
+  updateUserProfileImage,
+  updateUserCoverImage,
+};
