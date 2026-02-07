@@ -129,8 +129,10 @@ const getFoodById = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, food, "Food fetched successfully"));
 });
 const getAllFoods = asyncHandler(async (req, res) => {
-  const foods = await Food.find();
-
+  const foods = await Food.find().sort({ createdAt: -1 });
+  if (!foods || foods.length === 0) {
+    throw new ApiError(404, "No delivery records found");
+  }
   return res
     .status(200)
     .json(new ApiResponse(200, foods, "All foods fetched successfully"));
