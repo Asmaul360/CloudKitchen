@@ -1,7 +1,7 @@
 import { Delivery } from "../models/delivery.model.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import uploadToCloudinary from "../utils/cloudinary.js";
+import { uploadToCloudinary } from "../utils/cloudinary.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 const addDelivery = asyncHandler(async (req, res) => {

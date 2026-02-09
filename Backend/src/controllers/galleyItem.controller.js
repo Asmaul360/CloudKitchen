@@ -1,7 +1,7 @@
 import { GalleryItem } from "../models/galleyItem.model.js";
 import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import uploadToCloudinary from "../utils/cloudinary.js";
+import { uploadToCloudinary } from "../utils/cloudinary.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import cloudinary from "../utils/cloudinary.js";
 
