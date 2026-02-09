@@ -49,6 +49,7 @@ const createGalleryItem = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(201, gallery, "Gallery item created successfully"));
 });
+
 const updateGalleryItem = asyncHandler(async (req, res) => {
   const { title, subtitle, type, actionLink } = req.body;
 
@@ -109,6 +110,7 @@ const updateGalleryItem = asyncHandler(async (req, res) => {
       new ApiResponse(200, update, "Gallery has been updated successfully")
     );
 });
+
 const getGalleryItem = asyncHandler(async (req, res) => {
   const gallery = await GalleryItem.findById(req.params.galleryId);
   if (!gallery) {
@@ -118,6 +120,7 @@ const getGalleryItem = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, gallery, "Gallery fetched successfully"));
 });
+
 const getAllGalleryItem = asyncHandler(async (req, res) => {
   const gallery = await GalleryItem.find();
 
@@ -127,6 +130,7 @@ const getAllGalleryItem = asyncHandler(async (req, res) => {
       new ApiResponse(200, gallery, "All Gallery item fetched successfully")
     );
 });
+
 const deleteGalleryItem = asyncHandler(async (req, res) => {
   const gallery = await GalleryItem.findById(req.params.galleryId);
   if (!gallery) {

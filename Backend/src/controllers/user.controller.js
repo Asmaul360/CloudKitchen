@@ -19,6 +19,7 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
     );
   }
 };
+
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, firstName, lastName, phone, password } = req.body;
   if ([username, email, firstName, lastName, phone, password].some((f) => !f)) {
@@ -62,6 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(201, createdUser, "User registered successfully"));
 });
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, username, password } = req.body;
   if (!(username || email)) {
@@ -100,6 +102,7 @@ const loginUser = asyncHandler(async (req, res) => {
       )
     );
 });
+
 const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
@@ -117,6 +120,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "User logged out successfully"));
 });
+
 const changePassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
@@ -142,11 +146,13 @@ const changePassword = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Password changed successfully"));
 });
+
 const getCurrentUser = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, req.user, "Current user fetched successfully"));
 });
+
 const updateAccountDetails = asyncHandler(async (req, res) => {
   const { firstName, lastName, email } = req.body;
 
@@ -170,6 +176,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Account details updated Successfully"));
 });
+
 const updateUserProfileImage = asyncHandler(async (req, res) => {
   const profileImageLocalPath = req.files?.profile?.[0]?.path;
 
@@ -195,6 +202,7 @@ const updateUserProfileImage = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, user, "Profile Image updated successfully"));
 });
+
 const updateUserCoverImage = asyncHandler(async (req, res) => {
   const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
   if (!coverImageLocalPath) {

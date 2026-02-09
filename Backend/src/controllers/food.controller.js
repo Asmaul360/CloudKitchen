@@ -39,6 +39,7 @@ const addFood = asyncHandler(async (req, res) => {
     .status(201)
     .json(new ApiResponse(201, food, "Food added successfully"));
 });
+
 const updateFood = asyncHandler(async (req, res) => {
   const { name, description, price, category, addOn } = req.body;
 
@@ -68,6 +69,7 @@ const updateFood = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, food, "Food details updated Successfully"));
 });
+
 const updateFoodImage = asyncHandler(async (req, res) => {
   const foodImageLocalPath = req.files?.image?.[0]?.path;
 
@@ -91,6 +93,7 @@ const updateFoodImage = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, food, "Food image updated successfully"));
 });
+
 const deleteFood = asyncHandler(async (req, res) => {
   const food = await Food.findByIdAndDelete(req.params.foodId);
 
@@ -102,6 +105,7 @@ const deleteFood = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Food removed Successfully"));
 });
+
 const deleteAllFoods = asyncHandler(async (req, res) => {
   const result = await Food.deleteMany({});
   if (result.deletedCount === 0) {
@@ -117,6 +121,7 @@ const deleteAllFoods = asyncHandler(async (req, res) => {
       )
     );
 });
+
 const getFoodById = asyncHandler(async (req, res) => {
   const food = await Food.findById(req.params.foodId);
 
@@ -128,6 +133,7 @@ const getFoodById = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, food, "Food fetched successfully"));
 });
+
 const getAllFoods = asyncHandler(async (req, res) => {
   const foods = await Food.find().sort({ createdAt: -1 });
   if (!foods || foods.length === 0) {
