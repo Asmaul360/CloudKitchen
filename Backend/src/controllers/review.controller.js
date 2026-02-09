@@ -3,7 +3,7 @@ import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse";
 import asyncHandler from "../utils/asyncHandler.js";
 
-const addReview = asyncHandler(async (req, res) => {
+const createReview = asyncHandler(async (req, res) => {
   const { userId, foodId, qty, orderId, foodReview, deliveryReview, comments } =
     req.body;
 
@@ -36,7 +36,7 @@ const addReview = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(201, addReview, "Review added successfully"));
+    .json(new ApiResponse(201, createReview, "Review created successfully"));
 });
 
 const updateReview = asyncHandler(async (req, res) => {
@@ -106,4 +106,4 @@ const deleteReview = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Review deleted successfully"));
 });
 
-export { addReview, updateReview, getReview, getAllReview, deleteReview };
+export { createReview, updateReview, getReview, getAllReview, deleteReview };
