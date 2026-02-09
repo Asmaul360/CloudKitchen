@@ -81,7 +81,7 @@ const getAllOrder = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, getAllOrder, "Orders fetched successfully"));
+    .json(new ApiResponse(200, orders, "Orders fetched successfully"));
 });
 
 const updateOrder = asyncHandler(async (req, res) => {
