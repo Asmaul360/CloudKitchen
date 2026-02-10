@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+
     address: [
       {
         _id: false,
@@ -31,40 +32,23 @@ const userSchema = new mongoose.Schema(
       },
     ],
 
-    firstName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    firstName: { type: String, required: true, trim: true },
+    lastName: { type: String, required: true, trim: true },
 
-    lastName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    phone: {
-      type: Number,
-      required: true,
-    },
+    phone: { type: Number, required: true },
 
     profileImage: { type: String, required: true },
-
     coverImage: { type: String },
 
-    password: {
-      type: String,
-      required: true,
-    },
+    password: { type: String, required: true },
 
     role: {
       type: String,
       enum: ["admin", "user", "delivery"],
       default: "user",
     },
-    refreshToken: {
-      type: String,
-      default: "",
-    },
+
+    refreshToken: { type: String, default: "" },
   },
   { timestamps: true }
 );
@@ -79,18 +63,31 @@ userSchema.methods.isPasswordCorrect = function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+// FIXED: sending username + role inside access token
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
-    { _id: this._id, email: this.email, role: this.role },
+    {
+      _id: this._id,
+      username: this.username,
+      email: this.email,
+      role: this.role,
+    },
     process.env.ACCESS_TOKEN,
     { expiresIn: process.env.ACCESS_TOKEN_EXPIRES }
   );
 };
 
+// FIXED: refresh token MUST also send role + username if needed
 userSchema.methods.generateRefreshToken = function () {
-  return jwt.sign({ _id: this._id }, process.env.REFRESH_TOKEN, {
-    expiresIn: process.env.REFRESH_TOKEN_EXPIRES,
-  });
+  return jwt.sign(
+    {
+      _id: this._id,
+      username: this.username,
+      role: this.role,
+    },
+    process.env.REFRESH_TOKEN,
+    { expiresIn: process.env.REFRESH_TOKEN_EXPIRES }
+  );
 };
 
 export const User = mongoose.model("User", userSchema);
