@@ -13,7 +13,7 @@ import {
   deleteUser,
 } from "../controllers/user.controller.js";
 
-import { upload } from "../middlewares/multer.middle.js";
+import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { verifyRole } from "../middlewares/role.middleware.js";
 
@@ -27,6 +27,7 @@ router.post(
   ]),
   registerUser
 );
+
 // FOR USERS
 router.post("/login", loginUser);
 router.post("/logout", verifyJWT, logoutUser);

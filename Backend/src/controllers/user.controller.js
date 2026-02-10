@@ -36,8 +36,15 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 });
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, email, firstName, lastName, phone, password } = req.body;
-  if ([username, email, firstName, lastName, phone, password].some((f) => !f)) {
+  // console.log("REGISTER BODY:", req.body);
+  // console.log("REGISTER FILES:", req.files);
+  const { username, email, firstName, lastName, phone, password, role } =
+    req.body;
+  if (
+    [username, email, firstName, lastName, phone, password, role].some(
+      (f) => !f
+    )
+  ) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -65,6 +72,7 @@ const registerUser = asyncHandler(async (req, res) => {
     lastName,
     phone,
     password,
+    role,
     profileImage: profileImage.url,
     coverImage: coverImage?.url || "",
   });
@@ -178,9 +186,9 @@ const getAllUsers = asyncHandler(async (req, res) => {
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email } = req.body;
+  const { firstName, lastName, email, role } = req.body;
 
-  if (!firstName || !lastName || !email) {
+  if (!firstName || !lastName || !email || !role) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -189,6 +197,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     {
       firstName,
       lastName,
+      role,
       email: email.toLowerCase(),
     },
     { new: true }
