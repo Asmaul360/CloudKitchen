@@ -13,7 +13,6 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 const router = Router();
 
-// console.log("FOOD ROUTER LOADED");
 router.post(
   "/add-food",
   upload.fields([{ name: "image", maxCount: 1 }]),
@@ -31,7 +30,6 @@ router.patch(
 
 router.get("/", verifyJWT, getAllFoods);
 router.get("/:foodId", verifyJWT, getFoodById);
-
 router.delete("/:foodId", verifyJWT, deleteFood);
 router.delete("/", verifyJWT, deleteAllFoods);
 
