@@ -178,14 +178,3 @@ npm run dev
 
 **Asmau Mallick**
 Cloud Kitchen Backend Developer
-
----
-
-## ⭐ If you need a Frontend README too, just ask!
-
-```
-
----
-
-If you want a **logo**, **badges**, or **API documentation table**, I can add them too.
-```
