@@ -32,9 +32,7 @@ router.post(
 router.post("/login", loginUser);
 router.post("/logout", verifyJWT, logoutUser);
 router.post("/refresh-token", verifyJWT, refreshAccessToken);
-
 router.get("/current-user", verifyJWT, getCurrentUser);
-
 router.patch("/change-password", verifyJWT, changePassword);
 router.patch("/update-account", verifyJWT, updateAccountDetails);
 

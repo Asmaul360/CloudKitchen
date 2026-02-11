@@ -1,6 +1,6 @@
 import { Review } from "../models/review.model.js";
 import ApiError from "../utils/ApiError.js";
-import ApiResponse from "../utils/ApiResponse";
+import ApiResponse from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 const createReview = asyncHandler(async (req, res) => {

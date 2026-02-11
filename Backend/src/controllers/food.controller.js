@@ -6,6 +6,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 
 const addFood = asyncHandler(async (req, res) => {
   const { name, description, price, category, addOn } = req.body;
+  console.log("Body:", req.body);
 
   if (!name || !description || !price || !category) {
     throw new ApiError(400, "All fields should be filled");
@@ -71,7 +72,7 @@ const updateFood = asyncHandler(async (req, res) => {
 });
 
 const updateFoodImage = asyncHandler(async (req, res) => {
-  const foodImageLocalPath = req.files?.image?.[0]?.path;
+  const foodImageLocalPath = req.file?.path;
 
   if (!foodImageLocalPath) {
     throw new ApiError(400, "Food image is required");
