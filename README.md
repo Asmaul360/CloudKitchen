@@ -1,331 +1,191 @@
-# 🍽️ **Cloud Kitchen Web App – Full Backend Architecture**
+# 🍽️ Cloud Kitchen Backend
 
-A complete, scalable, production-grade backend system for a **Cloud Kitchen** application, built using a modern MERN-friendly stack.
-Designed with **clean architecture, role-based access, feature modules, and API-first development**.
+A complete backend system for a Cloud Kitchen application built using **Node.js**, **Express.js**, **MongoDB**, **JWT**, **Multer**, and **Cloudinary**.
 
-The **Frontend will be built using React**, and this backend is fully optimized for integration with React-based UI/UX.
-
----
-
-![Image](https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/2025-06/cloud%20kitchen1%20%282%29.jpg)
-
-![Image](https://www.researchgate.net/publication/267436509/figure/fig1/AS%3A392057165238288%401470485120915/System-architecture-the-main-components.png)
-
-![Image](https://www.coreycleary.me/_next/static/media/Express-REST-API-Struc.aa7ecaa0c41dbb7344c70665a5f5e259.png)
+This backend manages Users, Food Items, Gallery Items, Cart System, Orders, Payments, Delivery, and Reviews.
 
 ---
 
-# 🚀 **Tech Stack Used**
+## 🚀 Features
 
-## 🖥 **Backend Technologies**
+### 👤 User Management
 
-- **Node.js**
-- **Express.js**
-- **MongoDB (Mongoose)**
-- **JWT Authentication**
-- **BCrypt / Crypto Security**
-- **Multer (Image Upload Structure)**
-- **Razorpay / Stripe (Payment Gateway Ready)**
-- **WhatsApp Cloud API (Notification Ready)**
+- Register / Login
+- JWT Authentication
+- Protected Routes
 
-## 🎨 **Frontend (Will Be Built in)**
+### 🍕 Food Management
 
-- **React.js**
-- **Axios (API Client)**
-- **React Query / Context API (State handling)**
-- **TailwindCSS**
+- Add / Update / Delete Foods
+- Upload Food Images (Cloudinary)
+- Manage Categories & Add-ons
 
-## ⚙️ **Development Tools**
+### 🖼️ Gallery Management
 
-- **Postman / ThunderClient** (API testing)
-- **Git & GitHub** (Version control)
-- **Dotenv** for environment management
+- Add / Update / Delete Gallery Items
+- Upload Promotional Banner Images
 
----
+### 🛒 Cart System
 
-# 🌟 **Core Features (Beautiful Icon Overview)**
+- Add Items to Cart
+- Update Quantity
+- Remove Item
+- Clear Cart
+- Auto Total Price Calculation
 
-## 🔐 **Authentication & Security**
+### 🛍️ Orders
 
-- 👤 Customer Registration
-- 🛡️ Admin Login
-- 🔑 JWT Secure Authentication
-- 🎭 Role-Based Access Control (Admin vs Customer)
+- Create Order
+- Update Order
+- Fetch All Orders / Single Order
+- Delivery Address Handling
+- Order Status Tracking
 
----
+### 💳 Payments
 
-## 🍔 **Menu Management**
+- Create Payment Record
+- Update Payment
+- Prevent Duplicate Transaction IDs
 
-- 📄 Add / Edit / Delete Menu Items (Admin)
-- 🔍 Search Food Items
-- 🗂️ Category Filtering
-- 📷 Image Support
-- 🟢 Availability Toggle
-- ⭐ Automatic Rating Calculation
+### 🚚 Delivery Management
 
----
+- Assign Delivery Person
+- Update Delivery Status
+- Auto-set Delivered Timestamp
+- Get Delivery Person Details
 
-## 🖼 **Smart Homepage Slider**
+### ⭐ Reviews
 
-- 🎞 Featured Dish Slider
-- 📢 Promotional Banners
-- 🖼 Admin Controlled
-- 🔁 Auto Refreshing Carousel
+- Add Review
+- Fetch All Reviews
 
 ---
 
-![Image](https://market-resized.envatousercontent.com/previews/files/164147410/01_preview.png?cf_fit=crop&crop=top&format=auto&h=300&q=85&s=aeb5efca7be62aa69b3ab82363e5801fc802d93aafd7a4b2b437ab27bc5d7f70&w=590)
-
-![Image](https://mir-s3-cdn-cf.behance.net/projects/404/909e5a180991601.Y3JvcCwxNDM1LDExMjMsMzEsMA.png)
-
----
-
-## 🛒 **Cart System**
-
-- 🛍 Add Multiple Items
-- ➕ Increase Quantity
-- ➖ Decrease Quantity
-- ❌ Remove Item
-- 💰 Auto Total Calculation
-
----
-
-## 📦 **Order System**
-
-- 📝 Place Orders
-- 🔄 Track Orders (Pending → Cooking → On The Way → Delivered)
-- 🧾 Order History
-- 🗺 Delivery Address
-- 📦 Packaging Instructions
-- 🟡 WhatsApp Order Confirmation (API-Ready)
-
----
-
-## ⭐ **Reviews & Ratings**
-
-- ⭐ Rate Food Items
-- 📝 Write Reviews
-- 🧠 Auto update dish rating
-- 🔍 View reviews per dish
-
----
-
-## 🎁 **Coupons & Discounts**
-
-- 🎫 Generate Coupons (Admin)
-- 💲 Apply Coupons (Customer)
-- 🧮 Auto Discount Calculation
-- ⏳ Set Expiry Dates
-
----
-
-## 🗺️ **Delivery Area Checker**
-
-- 📍 Add Delivery Zones
-- 🚫 Block Non-Deliverable Areas
-- ✔ Check address eligibility
-
----
-
-## 🏞 **Gallery Page**
-
-- 📷 Upload Kitchen / Food Images
-- 🖼 Auto-display gallery
-- 🧼 Clean layout support in frontend
-
----
-
-## 💳 **Payment Gateway (Ready Structure)**
-
-- 🔐 Payment order creation
-- 💵 Payment verification
-- 📜 Store transactions
-- 🧾 Razorpay / Stripe supported
-
----
-
-# 🗂 **Full Folder Structure (Backend)**
+## 📁 Folder Structure
 
 ```
-cloud-kitchen-backend/
-│── server.js
-│── package.json
-│
-├── config/
-│   └── db.js
-│
-├── middleware/
-│   └── auth.js
+
+src/
+├── controllers/
+│ ├── cart.controller.js
+│ ├── delivery.controller.js
+│ ├── food.controller.js
+│ ├── galleryItem.controller.js
+│ ├── order.controller.js
+│ ├── payment.controller.js
+│ ├── review.controller.js
+│ └── user.controller.js
 │
 ├── models/
-│   ├── User.js
-│   ├── Menu.js
-│   ├── Cart.js
-│   ├── Order.js
-│   ├── FeaturedItem.js
-│   ├── Review.js
-│   ├── Coupon.js
-│   ├── DeliveryArea.js
-│   ├── GalleryItem.js
-│   └── Payment.js
-│
-├── controllers/
-│   ├── userController.js
-│   ├── menuController.js
-│   ├── cartController.js
-│   ├── orderController.js
-│   ├── featuredController.js
-│   ├── reviewController.js
-│   ├── couponController.js
-│   ├── deliveryController.js
-│   ├── galleryController.js
-│   └── paymentController.js
+│ ├── cart.model.js
+│ ├── delivery.model.js
+│ ├── food.model.js
+│ ├── galleryItem.model.js
+│ ├── order.model.js
+│ ├── payment.model.js
+│ ├── review.model.js
+│ └── user.model.js
 │
 ├── routes/
-│   ├── userRoutes.js
-│   ├── menuRoutes.js
-│   ├── cartRoutes.js
-│   ├── orderRoutes.js
-│   ├── featuredRoutes.js
-│   ├── reviewRoutes.js
-│   ├── couponRoutes.js
-│   ├── deliveryRoutes.js
-│   ├── galleryRoutes.js
-│   └── paymentRoutes.js
+│ ├── cart.routes.js
+│ ├── delivery.routes.js
+│ ├── food.routes.js
+│ ├── galleryItem.routes.js
+│ ├── order.routes.js
+│ ├── payment.routes.js
+│ ├── review.routes.js
+│ └── user.routes.js
 │
-└── uploads/
+├── middlewares/
+│ ├── auth.middleware.js
+│ ├── multer.middleware.js
+│ └── role.middleware.js
+│
+├── utils/
+│ ├── ApiError.js
+│ ├── ApiResponse.js
+│ ├── asyncHandler.js
+│ └── cloudinary.js
+│
+├── app.js
+└── index.js
+
 ```
 
 ---
 
-# 🌐 **API Map (NO CODE, JUST ENDPOINT STRUCTURE)**
+## ⚙️ Installation & Setup
 
-## 👤 **User**
+### 1️⃣ Clone Repository
 
-```
-/user/register
-/user/login
-/user/me
-```
-
-## 🍔 **Menu**
-
-```
-/menu/add
-/menu
-/menu/search
-/menu/category/:name
-/menu/:id (update/delete)
+```bash
+git clone https://github.com/yourname/cloud-kitchen-backend.git
+cd cloud-kitchen-backend
 ```
 
-## 🛒 **Cart**
+### 2️⃣ Install Dependencies
 
-```
-/cart/add
-/carts
-/cart/update
-/cart/remove
+```bash
+npm install
 ```
 
-## 📦 **Orders**
+### 3️⃣ Create `.env`
 
 ```
-/order
-/order/my
-/order/:id
-/order/status/:id
+MONGO_URI=your_mongodb_connection
+CLOUDINARY_CLOUD_NAME=xxxx
+CLOUDINARY_API_KEY=xxxx
+CLOUDINARY_API_SECRET=xxxx
+
+ACCESS_TOKEN=youraccesstoken
+ACCESS_TOKEN_EXPIRES=15m
+REFRESH_TOKEN=yourrefreshtoken
+REFRESH_TOKEN_EXPIRES=7d
+
+CORS_ORIGIN=*
+PORT=8000
 ```
 
-## 🎞 **Featured Slider**
+### 4️⃣ Start Server
 
-```
-/featured/add
-/featured
-```
-
-## ⭐ **Reviews**
-
-```
-/review/add
-/review/:menuId
-```
-
-## 🎁 **Coupons**
-
-```
-/coupon/create
-/coupon/apply
-```
-
-## 🗺️ **Delivery Areas**
-
-```
-/delivery/add
-/delivery
-```
-
-## 🏞 **Gallery**
-
-```
-/gallery/add
-/gallery
-```
-
-## 💳 **Payments**
-
-```
-/payment/init
-/payment/verify
+```bash
+npm run dev
 ```
 
 ---
 
-# 🛡 **Role-Based Access (RBAC)**
+## 🔗 API Overview
 
-### 👨‍🍳 **Admin Permissions**
+### 👤 Users → `/api/v1/users`
 
-- Add / Edit / Delete Menu Items
-- Manage Slider
-- Create Coupons
-- Update Order Status
-- Add Gallery Photos
-- Add Delivery Zones
+### 🍔 Food → `/api/v1/food`
 
-### 👤 **Customer Permissions**
+### 🖼️ Gallery → `/api/v1/galleryItem`
 
-- Register & Login
-- Browse Menu
-- Add to Cart
-- Apply Coupons
-- Place Orders
-- Track Orders
-- Add Reviews
+### 🛒 Cart → `/api/v1/cart`
+
+### 🛍️ Orders → `/api/v1/order`
+
+### 💳 Payments → `/api/v1/payment`
+
+### 🚚 Delivery → `/api/v1/delivery`
+
+### ⭐ Reviews → `/api/v1/review`
 
 ---
 
-# 🔧 **Environment Variables Required (No Code)**
+## 🧑‍💻 Developer
 
-- `MONGO_URI`
-- `JWT_SECRET`
-- `RAZORPAY_KEY` _(optional)_
-- `RAZORPAY_SECRET` _(optional)_
+**Asmau Mallick**
+Cloud Kitchen Backend Developer
 
 ---
 
-# 🧪 **Testing Tools**
+## ⭐ If you need a Frontend README too, just ask!
 
-- Postman
-- ThunderClient
-- MongoDB Compass
+```
 
 ---
 
-# 🎉 **This Backend Is Ready for Production**
-
-- Fully modular
-- Scalable API structure
-- React-friendly endpoints
-- Secure authentication
-- Feature-rich systems
-
-  **“CHACHA CODERS”**
+If you want a **logo**, **badges**, or **API documentation table**, I can add them too.
+```
